@@ -3,6 +3,7 @@ import random
 def  randomly_generate():
 	"""
 	Randomly generates a 4-digit number (with unique digits).
+	hello
 	"""
 	list_1 = []
 	for i in range(1000,9999):
