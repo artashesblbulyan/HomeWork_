@@ -6,16 +6,24 @@ def randomly_generate():
     Randomly generates a 4-digit number (with unique digits).
     hello
     """
-    list_1 = []
-    for i in range(1000, 9999):
-        list_1.append(i)
-        k = 0
-        for j in str(i):
-            if str(i).count(j) > 1:
-                k += 1
-                if k == 1:
-                    list_1.remove(i)
-    return str(random.choice(list_1))
+    k = random.randrange(1023, 9999)
+    k = set(str(k))
+    while len(k) < 4:
+        k = random.randrange(1023, 9999)
+        k = set(str(k))
+    else:
+        k = "".join(k)
+        return k
+    # list_1 = []
+    # for i in range(1000, 9999):
+    #     list_1.append(i)
+    #     k = 0
+    #     for j in str(i):
+    #         if str(i).count(j) > 1:
+    #             k += 1
+    #             if k == 1:
+    #                 list_1.remove(i)
+    # return str(random.choice(list_1))
 
 
 def user_num(user: str) -> bool:
