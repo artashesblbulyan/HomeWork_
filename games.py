@@ -63,3 +63,4 @@ def cows_and_bulls(user, rend_num):
 rend_num_1 = randomly_generate()
 user_1 = input("number\n")
 cows_and_bulls(user_1, rend_num_1)
+print("A")
