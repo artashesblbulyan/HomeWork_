@@ -25,6 +25,8 @@ print(a.perimeter_circle())
 class Human:
 
     def __init__(self, name, surname, age, height, weight):
+        if not(isinstance(age, int) and isinstance(height, (int, float)) and isinstance(weight, (int, float))):
+            raise TypeError(f"{age},{height},{weight} is not an instance of int or float")
         self.name = name
         self.surname = surname
         self.age = age
