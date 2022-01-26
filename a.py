@@ -3,6 +3,8 @@ import tkinter as tk
 from functools import partial
 import random
 from tkinter import messagebox
+# import os
+import sys
 # import TkMessageBox
 
 
@@ -21,17 +23,18 @@ def randomly_generate():
     Randomly generates a 4-digit number (with unique digits).
     hello
     """
-    k = random.randrange(1023, 9999)
-    k = set(str(k))
-    while len(k) < 4:
-        k = random.randrange(1023, 9999)
-        k = set(str(k))
+    pc_random = random.randrange(1023, 9999)
+    pc_random = set(str(pc_random))
+    while len(pc_random) < 4:
+        pc_random = random.randrange(1023, 9999)
+        pc_random = set(str(pc_random))
     else:
-        k = "".join(k)
-        return k
+        pc_random = "".join(pc_random)
+        return pc_random
 
 
-krandomly_generate = randomly_generate()
+
+
 
 
 class GamesGam:
@@ -39,6 +42,7 @@ class GamesGam:
     def __init__(self):
         self.number_1 = None
         self.text = ""
+        self.pc_random_number = randomly_generate()
 
     def number_insert(self, num):
         self.number_1 = str(num)
@@ -61,12 +65,30 @@ class GamesGam:
         else:
             label.configure(text=self.text, font=('helvetica', 22))
 
-    def helloCallBack(self):
-        messagebox.askokcancel("HAppi",f"congratulations you guessed the number {self.text} guesses made by the user-")
+    def number_delet_del(self):
+        self.text = ""
+        label.configure(text=self.text, font=('helvetica', 22))
+        print(self.text)
 
-    def cows_and_bulls(self):
+    def helloCallBack(self):
+        messagebox.askokcancel("HAppi", f"congratulations you guessed the number {self.text} guesses made by the user-")
+        pc_random_number = randomly_generate()
+        # self.cows_and_bulls(pc_random_number)
+        print(pc_random_number)
+        return pc_random_number
+        # print(pc_random_number)
+        # a = GamesGam()
+        # os.execv()
+        # os.system("shutdown /r /t 1")
+        # os.close()
+        # os.closerange()
+
+    def exit_(self):
+        sys.exit()
+
+    def cows_and_bulls(self, pc_random_number):
         user = self.text
-        rend_num = krandomly_generate
+        pc_random_number =self.pc_random_number
         """
         For every digit that the user guessed correctly in the correct place,
         they have a “cow”.
@@ -76,15 +98,15 @@ class GamesGam:
         Once the user guesses the correct number, the game is over.
         """
         guesses = 0
-        if user != rend_num and user_num(user) and len(user) == 4:
-            print(rend_num)
+        if user != pc_random_number and user_num(user) and len(user) == 4:
+            print(pc_random_number)
             cow = 0
             bull = 0
             for i in user:
-                if i in rend_num:
-                    if user.index(i) == rend_num.index(i):
+                if i in pc_random_number:
+                    if user.index(i) == pc_random_number.index(i):
                         cow += 1
-                    elif user.index(i) != rend_num.index(i):
+                    elif user.index(i) != pc_random_number.index(i):
                         bull += 1
                     else:
                         continue
@@ -98,25 +120,30 @@ class GamesGam:
             pass
 
         else:
-            # k = "asa"
+            # b = GamesGam()
             self.helloCallBack()
-            # k = rend_num
-            print("congratulations you guessed the number ", rend_num, "guesses made by the user-", guesses)
-            # return k
+            # rend_num = randomly_generate()
+            b = a.pc_random_number
+            print("congratulations you guessed the number ", pc_random_number, "guesses made by the user-", guesses)
+
+            return b
 
 
+# b = a
 a = GamesGam()
+b = a.pc_random_number
+
 root = tk.Tk()
-print(dir(root))
+# print(dir(root))
 root.title("Games cow or bull")
 root.config(bg='#5FB698')
-frame_4 = tk.Frame(root, borderwidth=10,background ="red")
-frame_5 = tk.Frame(root, borderwidth=10,background ="blue")
-frame_6 = tk.Frame(root, borderwidth=10,background ="black")
-frame = tk.Frame(root, borderwidth=10,background ="green")
-frame_1 = tk.Frame(root, borderwidth=10,background ="orange")
-frame_2 = tk.Frame(root, borderwidth=10,background ="violet")
-frame_3 = tk.Frame(root, borderwidth=10,background ="yellow")
+frame_4 = tk.Frame(root, borderwidth=5, background="red")
+frame_5 = tk.Frame(root, borderwidth=5, background="blue")
+frame_6 = tk.Frame(root, borderwidth=5, background="black")
+frame = tk.Frame(root, borderwidth=5, background="green")
+frame_1 = tk.Frame(root, borderwidth=5, background="orange")
+frame_2 = tk.Frame(root, borderwidth=5, background="violet")
+frame_3 = tk.Frame(root, borderwidth=5, background="yellow")
 frame_4.pack()
 frame_5.pack()
 frame_6.pack()
@@ -131,37 +158,45 @@ k = "X X X X"
 # l_1.config(font=("Courier", 24))
 l_2 = tk.Label(frame_4, text=k)
 l_2.config(font=('helvetica', 22))
-label_1 = tk.Label(frame_6, text="guess a 4-digit number ****")
+label_1 = tk.Label(frame_6, text="guess a 4-digit number ****", font=('helvetica', 20))
 label_1.grid(column=1, row=1)
-label = tk.Label(frame_5, text="* * * *",font=('helvetica', 22))
+label = tk.Label(frame_5, text="* * * *", font=('helvetica', 22))
 label.grid(column=2, row=1)
 slogan = tk.Button(frame, text="1", width=4, height=2, font=('helvetica', 22), command=partial(a.number_insert, 1))
-
 slogan_1 = tk.Button(frame, text="2", width=4, height=2, font=('helvetica', 22), command=partial(a.number_insert, 2))
 slogan_2 = tk.Button(frame, text="3", width=4, height=2, font=('helvetica', 22), command=partial(a.number_insert, 3))
+button_bc = tk.Button(frame, text="BC", width=4, height=2, font=('helvetica', 22), command=partial(a.number_delet_del))
 slogan_3 = tk.Button(frame_1, text="4", width=4, height=2, font=('helvetica', 22), command=partial(a.number_insert, 4))
 slogan_4 = tk.Button(frame_1, text="5", width=4, height=2, font=('helvetica', 22), command=partial(a.number_insert, 5))
 slogan_5 = tk.Button(frame_1, text="6", width=4, height=2, font=('helvetica', 22), command=partial(a.number_insert, 6))
 slogan_6 = tk.Button(frame_2, text="7", width=4, height=2, font=('helvetica', 22), command=partial(a.number_insert, 7))
 slogan_7 = tk.Button(frame_2, text="8", width=4, height=2, font=('helvetica', 22), command=partial(a.number_insert, 8))
-slogan_8 = tk.Button(frame_2, text="9",width=4, height=2, font=('helvetica', 22), command=partial(a.number_insert, 9))
+slogan_8 = tk.Button(frame_2, text="9", width=4, height=2, font=('helvetica', 22), command=partial(a.number_insert, 9))
 slogan_9 = tk.Button(frame_3, text="0", width=4, height=2, font=('helvetica', 22), command=partial(a.number_insert, 0))
-slogan_10 = tk.Button(frame_3, text="<", width=4, height=2, font=('helvetica', 22), command=partial(a.number_delet))
-slogan_11 = tk.Button(frame_3, text="OK", width=4, height=2, font=('helvetica', 22), command=partial(a.cows_and_bulls))
+button_exit = tk.Button(frame_3, text="exit", width=4, height=2, font=('helvetica', 22), command=partial(a.exit_))
+slogan_10 = tk.Button(frame_1, text="<", width=4, height=2, font=('helvetica', 22), command=partial(a.number_delet))
+button_ok = tk.Button(frame_2, text="OK", width=4, height=2, font=('helvetica', 22), command=partial(a.cows_and_bulls,b))
 
-# l_1.pack(side=tk.TOP)
+
 l_2.pack(side=tk.TOP)
 slogan.pack(side=tk.LEFT)
 slogan_1.pack(side=tk.LEFT)
 slogan_2.pack(side=tk.LEFT)
 slogan_3.pack(side=tk.LEFT)
+button_bc.pack(side=tk.LEFT)
 slogan_4.pack(side=tk.LEFT)
 slogan_5.pack(side=tk.LEFT)
 slogan_6.pack(side=tk.LEFT)
 slogan_7.pack(side=tk.LEFT)
 slogan_8.pack(side=tk.LEFT)
 slogan_9.pack(side=tk.LEFT)
+button_exit.pack(side=tk.LEFT)
 slogan_10.pack(side=tk.LEFT)
-slogan_11.pack(side=tk.LEFT)
+button_ok.pack(side=tk.LEFT)
 
 root.mainloop()
+
+
+name = "Artash"
+
+print("karen" %name)
