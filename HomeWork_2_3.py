@@ -93,8 +93,6 @@ class Hotel:
         self.mid_room_price = mid_room_price
         self.rooms_lux = {'room4': "free", 'room5': "free", 'room6': "free"}
         self.lux_room_price = lux_room_price
-        # self.room_mid = self.rooms_mid[self.mid_room_price]
-        # self.room_lux = self.rooms_lux[self.lux_room_price]
         super().__init__(*args, **kwargs)
 
     def presentation_hotel(self):
@@ -125,13 +123,13 @@ class Hotel:
                 return "There is no free room"
 
     def discount_room(self, room_name, discount_interest):
-        
+
         if room_name in self.rooms_mid.keys():
-            self.rooms_mid[room_name] = \
-                self.rooms_mid[room_name]-self.rooms_mid[room_name]*(discount_interest/100)
+            self.mid_room_price = \
+                self.mid_room_price-self.mid_room_price*(discount_interest/100)
         elif room_name in self.rooms_lux.keys():
-            self.rooms_lux[room_name] = \
-                self.rooms_lux[room_name]-self.rooms_lux[room_name]*(discount_interest/100)
+            self.lux_room_price = \
+                self.lux_room_price-self.lux_room_price*(discount_interest/100)
 
 
 class Taxi:
