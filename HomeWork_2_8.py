@@ -30,7 +30,12 @@ class UrlImage:
         """
         data = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+',
                           text_url)
-        return data
+        for i in data:
+            if i[-4:] == ".jpg" or i[-4:] == ".png":
+                self.image_list.append(i)
+            else:
+                continue
+        return self.image_list
 
     def reads_file(self, url_page):
         """
@@ -41,14 +46,7 @@ class UrlImage:
         try:
             # url_request = requests.get(url_page)
             data = self.finds_url(requests.get(url_page).text)
-            for i in data:
-                if i[-4:] == ".jpg" or i[-4:] == ".png":
-                    requests.get(i)
-                    self.image_list.append(i)
-                else:
-                    continue
-            return self.image_list
-
+            return data
         except requests.exceptions.ConnectionError as err:
             return "ConnectionError"
 
@@ -80,6 +78,6 @@ class UrlImage:
 a = UrlImage("file.json")
 
 # print(a.reads_json_file())
-# print(a.reads_file("https://ru.depositphotos.com/11843618/stock-photo-ftp-key-shows-file-transfer.html"))
-a.downloads_jpeg_image('dog')
+print(a.reads_file("https://edition.cnn.com/travel/article/wildlife-photographer-peoples-choice-intl-scli-scn/index.html"))
+# a.downloads_jpeg_image('dog')
 
