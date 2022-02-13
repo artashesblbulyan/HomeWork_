@@ -103,13 +103,41 @@ class UrlImage:
         for thread in thread_list:
             thread.join()
 
+    def quote_is(self):
+        url_quote ='https://zenquotes.io/api/random'
+        while True:
+            try:
+                if requests.get(url_quote).status_code == 200:
+                    res = requests.get(url_quote)
+                    file = res.json()
+                    a = yield file[0].get('q'), file[0].get('a')
+            except requests.exceptions.ConnectionError as err:
+                return err
+
+    def quote_is_text_file(self, amount):
+        with open('aphorism.txt', "w") as text:
+            b = 0
+            while b != amount:
+                aphorism = next(self.quote_is())
+                if aphorism[0] == "Too many requests. Obtain an auth key for unlimited access.":
+                    continue
+                else:
+                    b += 1
+                    text.write(f'{aphorism[0]}, {aphorism[1]} \n')
+
 
 a = UrlImage("art.json")
-a.reads_json_file()
+# print(next(a.quote_is()))
+# print(next(a.quote_is()))
+# print(next(a.quote_is()))
+# print(next(a.quote_is()))
+# print(next(a.quote_is()))
+a.quote_is_text_file(10)
+# a.reads_json_file()
 # print(a.reads_file("https://apps.apple.com/us/app/google-photos/id962194608"))
 # a.downloads_jpeg_image('a_1')
 # a.finds_url()
-a.download_all_pictures()
+# a.download_all_pictures()
 # a.url_in_file(url="https://yandex.ru/images/search?text=image&stype=image&lr=10262&source=serp", file_name="art.json")
 
 
