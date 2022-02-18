@@ -35,6 +35,7 @@ def login_dec(file):
                         if data == args[1]:
                             result = function(args[0], args[1])
                             return result
+                raise TypeError("identification failed")
         return decor
     return login
 
@@ -51,4 +52,4 @@ def input_login(username, password):
 
 # username_1 = input("username: ")
 # password_1 = input("password: ")
-input_login("Artash", "pass14")
+input_login("Artashxas", "pass14")
